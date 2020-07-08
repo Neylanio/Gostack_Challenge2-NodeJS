@@ -19,15 +19,14 @@ class CreateTransactionService {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public checkBalance(value: number): boolean {
-    return this.transactionsRepository.getBalance().total - value >= 0;
-  }
-
   public execute({ title, type, value }: Request): Transaction {
-    if (type === 'outcome') {
-      if (!this.checkBalance(value)) {
-        throw Error('Transaction not allowed');
-      }
+    if (!['income', 'outcome'].includes(type)) {
+      throw Error('Transaction type is not allowed');
+    }
+
+    const { total } = this.transactionsRepository.getBalance();
+    if (type === 'outcome' && total < value) {
+      throw Error('Transaction not allowed');
     }
     const transaction = this.transactionsRepository.create({
       title,
