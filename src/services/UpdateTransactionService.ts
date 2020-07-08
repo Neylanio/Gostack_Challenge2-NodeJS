@@ -2,19 +2,20 @@ import TransactionsRepository from '../repositories/TransactionsRepository';
 import Transaction from '../models/Transaction';
 
 interface Request {
+  id: string;
   title: string;
   value: number;
   type: 'income' | 'outcome';
 }
 
-class CreateTransactionService {
+class UpdateTransactionService {
   private transactionsRepository: TransactionsRepository;
 
   constructor(transactionsRepository: TransactionsRepository) {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public execute({ title, type, value }: Request): Transaction {
+  public execute({ id, title, type, value }: Request): Transaction {
     if (!['income', 'outcome'].includes(type)) {
       throw Error('Transaction type is not allowed');
     }
@@ -23,7 +24,8 @@ class CreateTransactionService {
     if (type === 'outcome' && total < value) {
       throw Error('Transaction not allowed');
     }
-    const transaction = this.transactionsRepository.create({
+    const transaction = this.transactionsRepository.update({
+      id,
       title,
       type,
       value,
@@ -33,4 +35,4 @@ class CreateTransactionService {
   }
 }
 
-export default CreateTransactionService;
+export default UpdateTransactionService;

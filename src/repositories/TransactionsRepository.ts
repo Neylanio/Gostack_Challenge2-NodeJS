@@ -1,6 +1,7 @@
 import Transaction from '../models/Transaction';
 
-interface CreateTransactionDTO {
+interface TransactionDTO {
+  id?: string;
   title: string;
   value: number;
   type: 'income' | 'outcome';
@@ -52,11 +53,28 @@ class TransactionsRepository {
     return balance;
   }
 
-  public create({ title, value, type }: CreateTransactionDTO): Transaction {
+  public create({ title, value, type }: TransactionDTO): Transaction {
     const transaction = new Transaction({ title, value, type });
     this.transactions.push(transaction);
 
     return transaction;
+  }
+
+  public update({ id, title, value, type }: TransactionDTO): Transaction {
+    const transactionId = this.transactions.findIndex(
+      transaction => transaction.id === id,
+    );
+
+    const idd = String(id);
+
+    this.transactions[transactionId] = {
+      id: idd,
+      title,
+      value,
+      type,
+    };
+
+    return this.transactions[transactionId];
   }
 }
 
