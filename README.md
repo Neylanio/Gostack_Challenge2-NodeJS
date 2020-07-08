@@ -1,5 +1,5 @@
 <h3 align="center">
-  Desafio 05: First Node.js project
+  Challenge 05: First Node.js project
 </h3>
 
 ## :rocket: About the challenge
@@ -7,17 +7,6 @@
 > OBS: In the project folder you need running the command `yarn` to install all dependecies.
 
 ### Rotas da aplicação
-
-- **`POST /transactions`**: This route must receive `title`, `value` e `type` in the body of request, being `type` the transaction type, `income` for input (deposits) and `outcome` for exits (withdrawals). When registering a new transaction, it must be stored inside an object with the following format:
-
-```json
-{
-  "id": "uuid",
-  "title": "Salário",
-  "value": 3000,
-  "type": "income"
-}
-```
 
 - **`GET /transactions`**: This route must return a list with all registered transactions so far, along with the sum of the entries, withdrawls and total credito. This route should return an object with the following format:
 
@@ -54,6 +43,27 @@
     "outcome": 5200,
     "total": 800
   }
+}
+```
+
+- **`POST /transactions`**: This route must receive `title`, `value` e `type` in the request body, being `type` the transaction type, `income` for input (deposits) and `outcome` for exits (withdrawals). If `type` will be `outcome` and the `value` can not be less than `total` of the balance. When registering a new transaction, it must be stored inside an object with the following format:
+
+```json
+{
+  "id": "uuid",
+  "title": "Salário",
+  "value": 3000,
+  "type": "income"
+}
+```
+
+- **`PUT /transactions/:id`**: This route must receive `id` in the request params and must receive `title`, `value` e `type` in the request body, being `type` the transaction type, `income` for input (deposits) and `outcome` for exits (withdrawals). If `type` will be `outcome`, the `value` can not be less than `total` of the balance. When updating the transaction, it must be stored inside an object with the following format:
+
+```json
+{
+  "title": "Salário2",
+  "value": 2000,
+  "type": "income"
 }
 ```
 
