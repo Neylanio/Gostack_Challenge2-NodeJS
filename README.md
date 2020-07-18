@@ -15,7 +15,7 @@
   "transactions": [
     {
       "id": "uuid",
-      "title": "Salário",
+      "title": "Salary",
       "value": 4000,
       "type": "income"
     },
@@ -27,13 +27,13 @@
     },
     {
       "id": "uuid",
-      "title": "Pagamento da fatura",
+      "title": "Payment",
       "value": 4000,
       "type": "outcome"
     },
     {
       "id": "uuid",
-      "title": "Cadeira Gamer",
+      "title": "Gamer Chair",
       "value": 1200,
       "type": "outcome"
     }
