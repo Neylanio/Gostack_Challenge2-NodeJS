@@ -4,7 +4,7 @@
 
 ## :rocket: About the challenge
 
-> OBS: In the project folder you need running the command `yarn` to install all dependecies.
+> OBS: you need to run the command `yarn` to install all dependecies.
 
 ### Rotas da aplicação
 
